@@ -1,0 +1,28 @@
+{
+  "name": "Employee_Management_System",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boylepeter/Employee_Management_System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^2.0.6",
+    "mysql": "^2.18.1",
+    "inquirer": "^7.3.3"
+  },
+  "bugs": {
+    "url": "https://github.com/boylepeter/Employee_Management_System/issues"
+  },
+  "homepage": "https://github.com/boylepeter/Employee_Management_System#readme"
+}
