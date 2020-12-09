@@ -41,7 +41,7 @@ function start() {
         })
       }
       else if (answer.task === "Update"){
-        updateEmployee()
+        updateRole()
       }
       else if (answer.task === "Exit"){
         connection.end();
@@ -115,7 +115,7 @@ function addDepartment(){
   .then(function(answer){
     connection.query(
       "INSERT INTO department SET ?",
-      {id: answer.deptId,
+      {deptId: answer.deptId,
       name: answer.name},
       function(err, res) {
         if (err) throw err;
