@@ -23,7 +23,7 @@ function start() {
       name: "task",
       type: "list",
       message: "What would you like to do?",
-      choices: ["Add", "View", "Update", "Exit"]
+      choices: ["Add", "View", "Update", "Delete", "Exit"]
     })
     .then(function(answer) {
       console.log(answer)
@@ -41,17 +41,37 @@ function start() {
         })
       }
       else if (answer.task === "Update"){
-        updateRole()
+        inquirer.prompt({
+          name: "whichUpdate",
+          type: "list",
+          message: "Which would you like to update?",
+          choices: ["Role", "Manager"]
+        }).then(function(answer){
+        if (answer.whichUpdate === "Role"){
+          updateRole()}
+        else {updateManager()}})
       }
       else if (answer.task === "Exit"){
         connection.end();
+      }
+      else if (answer.task === "Delete"){
+        inquirer.prompt({
+          name: "whichDelete",
+          type: "list",
+          message: "Which would you like to delete?",
+          choices: ["Employee", "Department", "Role"]
+        }).then(function(answer){
+          if (answer.whichDelete === "Employee"){deleteEmployee()}
+          else if (answer.whichDelete === "Department"){deleteDepartment()}
+          else {deleteRole()}
+        })
       }
       else {
         inquirer.prompt({
           name:"typeView",
           type: "list",
           message: "Which would you like to view?",
-          choices: ["Employees", "Departments", "Roles"]
+          choices: ["Employees", "Managers", "Departments", "Roles"]
         })
         .then(function(answer){
           if (answer.typeView === "Employees"){
@@ -60,6 +80,9 @@ function start() {
           else if (answer.typeView === "Departments"){
             viewDepartment()
           } 
+          else if (answer.typeView === "Managers"){
+            viewByManager()
+          }
           else {viewRole()}
         })} 
     });
@@ -155,7 +178,26 @@ function updateRole(){
   })
 }
 
-
+function updateManager(){
+  inquirer.prompt([{
+    name: "id",
+    type: "input",
+    message: "What is the Employees ID?"
+  },
+  {name: "mgrId",
+  type: "input",
+  message: "What is the new managers ID?"}])
+  .then(function(answer){
+    connection.query(
+      "UPDATE employee SET mgrId = '" + answer.mgrId + "' WHERE id = " + answer.id,
+      function (err, res) {
+        if (err) throw err;
+        console.log(res.affectedRows + " Manager updated!\n");
+        viewEmployee()
+      })
+  })
+ 
+}
 
 function viewEmployee() {
   console.log("Table Employee...\n");
@@ -189,3 +231,58 @@ function viewDepartment() {
     connection.end();
   });
 }
+
+function viewByManager(){
+  console.log("View by manager...\n");
+  connection.query("SELECT * FROM emsdb.employee ORDER BY mgrId", function(err, res){
+    if (err) throw err;
+    console.lof(res);
+    console.table(res);
+    connection.end();
+  })
+}
+
+function deleteEmployee(){
+  inquirer.prompt({
+    name: "id",
+    type: "input",
+    message: "What is the employees ID that you want to delete?"
+  }).then(function(answer){
+  connection.query(
+    "DELETE FROM employee WHERE id =" + answer.id,
+    function (err, res) {
+      if (err) throw err;
+      console.log(res.affectedRows + " Manager updated!\n");
+      viewEmployee()})
+    })
+};
+
+function deleteDepartment(){
+  inquirer.prompt({
+    name: "id",
+    type: "input",
+    message: "What is the department ID that you want to delete?"
+  }).then(function(answer){
+  connection.query(
+    "DELETE FROM department WHERE deptId = " + answer.id,
+    function (err, res) {
+      if (err) throw err;
+      console.log(res.affectedRows + " department updated!\n");
+      viewDepartment()})
+    })
+};
+
+function deleteRole(){
+  inquirer.prompt({
+    name: "id",
+    type: "input",
+    message: "What is the role ID that you want to delete?"
+  }).then(function(answer){
+  connection.query(
+    "DELETE FROM role WHERE id =" + answer.id,
+    function (err, res) {
+      if (err) throw err;
+      console.log(res.affectedRows + " role updated!\n");
+      viewRole()})
+    })
+};
