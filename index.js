@@ -234,9 +234,9 @@ function viewDepartment() {
 
 function viewByManager(){
   console.log("View by manager...\n");
-  connection.query("SELECT * FROM emsdb.employee ORDER BY mgrId", function(err, res){
+  connection.query("SELECT * FROM employee ORDER BY mgrId", function(err, res){
     if (err) throw err;
-    console.lof(res);
+    console.log(res);
     console.table(res);
     connection.end();
   })

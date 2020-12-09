@@ -1,100 +1,50 @@
-# Employee_Management_System
-Design the following database schema containing three tables:
 
-![Database Schema](Assets/schema.png)
+# Employee Management System
 
-* **department**:
+## Description: 
+Tasked with providing a database of employees and utiilizing a command line interface to navigate all employee data, we utilized javascript, mysql, as well as the inquirer npm to provide an intuitive and effective system which allows the user to accomplish all tasks outlined for us.
+## Table of Contents
 
-  * **id** - INT PRIMARY KEY
-  * **name** - VARCHAR(30) to hold department name
+-[Description](#description)
 
-* **role**:
+-[Installation](#installation)
 
-  * **id** - INT PRIMARY KEY
-  * **title** -  VARCHAR(30) to hold role title
-  * **salary** -  DECIMAL to hold role salary
-  * **department_id** -  INT to hold reference to department role belongs to
+-[Instructions](#instructions)
 
-* **employee**:
+-[Licenses](#licenses)
 
-  * **id** - INT PRIMARY KEY
-  * **first_name** - VARCHAR(30) to hold employee first name
-  * **last_name** - VARCHAR(30) to hold employee last name
-  * **role_id** - INT to hold reference to role employee has
-  * **manager_id** - INT to hold reference to another employee that manages the employee being Created. This field may be null if the employee has no manager
-  
-Build a command-line application that at a minimum allows the user to:
+-[Deployed](#deployed)
 
-  * Add departments, roles, employees
+-[Contact](#contact)
 
-  * View departments, roles, employees
+-[Contributors](#Contributors)
 
-  * Update employee roles
+-[Testing](#Tests)
 
-Bonus points if you're able to:
+## Installation:
+Utilizing the code available through the owners github page (linked below) as well as installing the attached dependancies.
+## Instructions:
+You will be prompted as to what you want to accomplish with the app. After selecting what actions you would like to perform, you will be provided with both a data object and a table of the current data.
+### Licenses: 
+![license](https://img.shields.io/badge/license-mit-blue)
+### Deployed: 
+[https://github.com/boylepeter/Employee_Management_System](https://github.com/boylepeter/Employee_Management_System)
+[Video of basic function](https://drive.google.com/file/d/1NAgUrQaHKsDZ95ybdDb6IVoVFvpi6bNR/view)
+[Video of bonus function](https://drive.google.com/file/d/1D0bv6TzOCIXh_wNO9mM3WeSy6H9XzjgI/view)
+![image](images/screenshot1.png)
+![image](images/screenshot2.png)
 
-  * Update employee managers
 
-  * View employees by manager
+### Contact:
 
-  * Delete departments, roles, and employees
+[Github](https://github.com/boylepeter)
 
-  * View the total utilized budget of a department -- ie the combined salaries of all employees in that department
+[LinkedIn](https://www.linkedin.com/in/peter-boyle-22b5071b7/)
 
-We can frame this challenge as follows:
+Email: [Boyle.Peter614@gmail.com](Boyle.Peter614@gmail.com)
 
-```
-As a business owner
-I want to be able to view and manage the departments, roles, and employees in my company
-So that I can organize and plan my business
-```
+### Contributors: 
+None
 
-How do you deliver this? Here are some guidelines:
-
-* Use the [MySQL](https://www.npmjs.com/package/mysql) NPM package to connect to your MySQL database and perform queries.
-
-* Use [InquirerJs](https://www.npmjs.com/package/inquirer/v/0.2.3) NPM package to interact with the user via the command-line.
-
-* Use [console.table](https://www.npmjs.com/package/console.table) to print MySQL rows to the console. There is a built-in version of `console.table`, but the NPM package formats the data a little better for our purposes.
-
-* You may wish to have a separate file containing functions for performing specific SQL queries you'll need to use. Could a constructor function or a class be helpful for organizing these?
-
-* You will need to perform a variety of SQL JOINS to complete this assignment, and it's recommended you review the week's activities if you need a refresher on this.
-
-![Employee Tracker](Assets/employee-tracker.gif)
-
-### Hints
-
-* You may wish to include a `seed.sql` file to pre-populate your database. This will make development of individual features much easier.
-
-* Focus on getting the basic functionality completed before working on more advanced features.
-
-* Review the week's activities for a refresher on MySQL.
-
-* Check out [SQL Bolt](https://sqlbolt.com/) for some extra MySQL help.
-
-## Minimum Requirements
-
-* Functional application.
-
-* GitHub repository with a unique name and a README describing the project.
-
-* The command-line application should allow users to:
-
-  * Add departments, roles, employees
-
-  * View departments, roles, employees
-
-  * Update employee roles
-
-## Bonus
-
-* The command-line application should allow users to:
-
-  * Update employee managers
-
-  * View employees by manager
-
-  * Delete departments, roles, and employees
-
-  * View the total utilized budget of a department -- ie the combined salaries of all employees in that department
+### Tests: 
+Please feel free to try the application for yourself. The instructions for use and installation can be found above.
