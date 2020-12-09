@@ -68,16 +68,16 @@ function start() {
 
 function addEmployee() {
   console.log("Creating new employee...\n");
-  inquirer.prompt([{
-    name: "first_name",
+  inquirer.prompt([
+    {name: "id",
+    type: "input",
+    message: "What is the employee ID? (this should be their employees ID.)"},
+    {name: "first_name",
     type: "input",
     message: "What is the new employees first name?"},
     {name: "last_name",
     type: "input",
     message: "What is the new employees last name?"},
-    {name: "id",
-    type: "input",
-    message: "What is the employee ID? (this should be their employees ID.)"},
     {name: "roleId",
     type: "input",
     message: "What is the new employees role ID?"},
@@ -100,7 +100,8 @@ function addEmployee() {
 
       viewEmployee();
     })}
-  )}
+  )
+};
 
 function addDepartment(){
   console.log("Creating department...\n")
@@ -121,7 +122,39 @@ function addDepartment(){
         console.log(res.affectedRows + " Department added!\n");
         viewDepartment()
   })
-  })};
+  })
+};
+
+function updateRole(){
+  console.log("Update roles...\n")
+  inquirer.prompt([
+    {name: "id",
+    type: "input",
+    message: "What is the employee ID?"},
+    {name: "title",
+    type: "input",
+    message: "What is the employee title?"},
+    {name: "salary",
+    type: "input",
+    message: "What is the employee salary?"},
+    {name: "deptId",
+    type: "input",
+    message: "What is the employee department ID?"}])
+  .then(function(answer){
+    connection.query(
+      "INSERT INTO role SET ?",
+      {id: answer.id,
+      title: answer.title,
+      salary: answer.salary,
+      deptId: answer.deptId},
+      function(err, res) {
+        if (err) throw err;
+        console.log(res.affectedRows + " Role updated!\n");
+        viewRole()
+  })
+  })
+}
+
 
 
 function viewEmployee() {
