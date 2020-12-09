@@ -33,6 +33,8 @@ You will be prompted as to what you want to accomplish with the app. After selec
 [Video of basic function](https://drive.google.com/file/d/1NAgUrQaHKsDZ95ybdDb6IVoVFvpi6bNR/view)
 
 [Video of bonus function](https://drive.google.com/file/d/1D0bv6TzOCIXh_wNO9mM3WeSy6H9XzjgI/view)
+
+[Video of join functions](https://drive.google.com/file/d/1THqi3gp_Vqr5tiPO-rGirBj9GdSjd2DG/view)
 ![image](images/screenshot1.png)
 ![image](images/screenshot2.png)
 
