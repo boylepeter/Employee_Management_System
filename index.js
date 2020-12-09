@@ -253,7 +253,7 @@ function viewByManager(){
 
 function viewEmployeeDept(){
   console.log("View Employee by department...\n");
-  connection.query("SELECT * FROM department INNER JOIN employee ON department.deptId = employee.roleId;", function(err, res){
+  connection.query("SELECT department.deptId, department.name, employee.id, employee.first_name, employee.last_name, employee.mgrId FROM department LEFT JOIN employee ON department.deptId = employee.roleId;", function(err, res){
     if (err) throw err;
     console.log(res);
     console.table(res);
@@ -263,7 +263,7 @@ function viewEmployeeDept(){
 
 function viewEmployeeRole(){
   console.log("View Employee by Role...\n");
-  connection.query("SELECT * FROM role INNER JOIN employee ON role.deptId = employee.roleId;", function(err, res){
+  connection.query("SELECT employee.id, employee.first_name, employee.last_name, role.deptId, employee.mgrId, role.title, role.salary  FROM employee LEFT JOIN role ON role.deptId = employee.roleId;", function(err, res){
     if (err) throw err;
     console.log(res);
     console.table(res);
@@ -273,7 +273,7 @@ function viewEmployeeRole(){
 
 function viewDepartmentRole(){
   console.log("View department by role...\n");
-  connection.query("SELECT * FROM department INNER JOIN role ON role.deptId = department.deptId;", function(err, res){
+  connection.query("SELECT department.deptId, role.title, role.id, role.salary FROM department LEFT JOIN role ON role.deptId = department.deptId;", function(err, res){
     if (err) throw err;
     console.log(res);
     console.table(res);
