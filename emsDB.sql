@@ -21,7 +21,7 @@ CREATE TABLE employee (
   first_name VARCHAR(45) NULL,
   last_name VARCHAR(45) NULL,
   roleId INT NULL,
-  mgrId INT NULL,
+  mgrId INT NULL
 );
 
 

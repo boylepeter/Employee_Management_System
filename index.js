@@ -71,7 +71,7 @@ function start() {
           name:"typeView",
           type: "list",
           message: "Which would you like to view?",
-          choices: ["Employees", "Managers", "Departments", "Roles"]
+          choices: ["Employees", "Managers", "Departments", "Roles", "Employee by department", "Employee by role", "Department by role"]
         })
         .then(function(answer){
           if (answer.typeView === "Employees"){
@@ -83,6 +83,15 @@ function start() {
           else if (answer.typeView === "Managers"){
             viewByManager()
           }
+          else if (answer.typeView === "Employee by role"){
+            viewEmployeeRole()
+          }
+          else if (answer.typeView === "Employee by department"){
+            viewEmployeeDept()
+          } 
+          else if (answer.typeView === "Department by role"){
+            viewDepartmentRole()
+          } 
           else {viewRole()}
         })} 
     });
@@ -235,6 +244,36 @@ function viewDepartment() {
 function viewByManager(){
   console.log("View by manager...\n");
   connection.query("SELECT * FROM employee ORDER BY mgrId", function(err, res){
+    if (err) throw err;
+    console.log(res);
+    console.table(res);
+    connection.end();
+  })
+}
+
+function viewEmployeeDept(){
+  console.log("View Employee by department...\n");
+  connection.query("SELECT * FROM department INNER JOIN employee ON department.deptId = employee.roleId;", function(err, res){
+    if (err) throw err;
+    console.log(res);
+    console.table(res);
+    connection.end();
+  })
+}
+
+function viewEmployeeRole(){
+  console.log("View Employee by Role...\n");
+  connection.query("SELECT * FROM role INNER JOIN employee ON role.deptId = employee.roleId;", function(err, res){
+    if (err) throw err;
+    console.log(res);
+    console.table(res);
+    connection.end();
+  })
+}
+
+function viewDepartmentRole(){
+  console.log("View department by role...\n");
+  connection.query("SELECT * FROM department INNER JOIN role ON role.deptId = department.deptId;", function(err, res){
     if (err) throw err;
     console.log(res);
     console.table(res);
