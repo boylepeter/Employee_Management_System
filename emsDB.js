@@ -29,10 +29,19 @@ function start() {
       console.log(answer)
       // based on their answers
       if (answer.task === "Add") {
-        addEmployee();
+        inquirer.prompt({
+          name: "whichAdd",
+          type: "list",
+          message: "Would you like to add an employee or department?",
+          choices: ["Employee", "Department"]
+        }).then(function(answer){
+          if (answer.whichAdd === "Employee"){
+            addEmployee();
+          }else{addDepartment()}
+        })
       }
       else if (answer.task === "Update"){
-
+        updateEmployee()
       }
       else if (answer.task === "Exit"){
         connection.end();
@@ -57,55 +66,93 @@ function start() {
 }
 
 
-// function addEmployee() {
-//   console.log("Creating new employee...\n");
-//   var query = connection.query(
-//     "INSERT INTO employee SET ?",
-//     {
-//       first_name: "Peter",
-//       last_name: "Boyle",
-//       roleId: 03,
-//       mgrId: 48,
-//     },
-//     function(err, res) {
-//       if (err) throw err;
-//       console.log(res.affectedRows + " Employee added!\n");
+function addEmployee() {
+  console.log("Creating new employee...\n");
+  inquirer.prompt([{
+    name: "first_name",
+    type: "input",
+    message: "What is the new employees first name?"},
+    {name: "last_name",
+    type: "input",
+    message: "What is the new employees last name?"},
+    {name: "id",
+    type: "input",
+    message: "What is the employee ID? (this should be their employees ID.)"},
+    {name: "roleId",
+    type: "input",
+    message: "What is the new employees role ID?"},
+    {name: "mgrId",
+    type: "input",
+    message: "What is the employees managers ID"}
+  ]).then(function(answer){
+    connection.query(
+    "INSERT INTO employee SET ?",
+    {
+      id: answer.id,
+      first_name: answer.first_name,
+      last_name: answer.last_name,
+      roleId: answer.roleId,
+      mgrId: answer.mgrId,
+    },
+    function(err, res) {
+      if (err) throw err;
+      console.log(res.affectedRows + " Employee added!\n");
 
-//       updateTable();
-//     }
-//   );
+      viewEmployee();
+    })}
+  )}
 
-//   // logs the actual query being run
-//   console.log(query.sql);
-// }
+function addDepartment(){
+  console.log("Creating department...\n")
+  inquirer.prompt([
+    {name: "deptId",
+    type: "input",
+    message: "What is the department id?"},
+    {name: "name",
+    type: "input",
+    message: "What is the department name?"}])
+  .then(function(answer){
+    connection.query(
+      "INSERT INTO department SET ?",
+      {id: answer.deptId,
+      name: answer.name},
+      function(err, res) {
+        if (err) throw err;
+        console.log(res.affectedRows + " Department added!\n");
+        viewDepartment()
+  })
+  })};
 
 
-// function viewEmployee() {
-//   console.log("Table Employee...\n");
-//   connection.query("SELECT * FROM employee", function(err, res) {
-//     if (err) throw err;
-//     // Log all results of the SELECT statement
-//     console.log(res);
-//     connection.end();
-//   });
-// }
+function viewEmployee() {
+  console.log("Table Employee...\n");
+  connection.query("SELECT * FROM employee", function(err, res) {
+    if (err) throw err;
+    // Log all results of the SELECT statement
+    console.log(res);
+    console.table(res);
+    connection.end();
+  });
+};
 
-// function viewRole() {
-//   console.log("Table Roles...\n");
-//   connection.query("SELECT * FROM role", function(err, res) {
-//     if (err) throw err;
-//     // Log all results of the SELECT statement
-//     console.log(res);
-//     connection.end();
-//   });
-// }
+function viewRole() {
+  console.log("Table Roles...\n");
+  connection.query("SELECT * FROM role", function(err, res) {
+    if (err) throw err;
+    // Log all results of the SELECT statement
+    console.log(res);
+    console.table(res);
+    connection.end();
+  });
+};
 
-// function viewDepartment() {
-//   console.log("Table Department...\n");
-//   connection.query("SELECT * FROM department", function(err, res) {
-//     if (err) throw err;
-//     // Log all results of the SELECT statement
-//     console.log(res);
-//     connection.end();
-//   });
-// }
+function viewDepartment() {
+  console.log("Table Department...\n");
+  connection.query("SELECT * FROM department", function(err, res) {
+    if (err) throw err;
+    // Log all results of the SELECT statement
+    console.log(res);
+    console.table(res);
+    connection.end();
+  });
+}
