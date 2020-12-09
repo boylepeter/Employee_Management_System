@@ -29,7 +29,9 @@ You will be prompted as to what you want to accomplish with the app. After selec
 ![license](https://img.shields.io/badge/license-mit-blue)
 ### Deployed: 
 [https://github.com/boylepeter/Employee_Management_System](https://github.com/boylepeter/Employee_Management_System)
+
 [Video of basic function](https://drive.google.com/file/d/1NAgUrQaHKsDZ95ybdDb6IVoVFvpi6bNR/view)
+
 [Video of bonus function](https://drive.google.com/file/d/1D0bv6TzOCIXh_wNO9mM3WeSy6H9XzjgI/view)
 ![image](images/screenshot1.png)
 ![image](images/screenshot2.png)
